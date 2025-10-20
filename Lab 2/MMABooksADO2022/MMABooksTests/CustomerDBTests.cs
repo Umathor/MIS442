@@ -67,7 +67,8 @@ namespace MMABooksTests
             c2.State = "NY";
             c2.ZipCode = "20204";
 
-            CustomerDB.UpdateCustomer(c, c2);
+            bool updated = CustomerDB.UpdateCustomer(c, c2);
+            Assert.IsTrue(updated);
             c = CustomerDB.GetCustomer(c.CustomerID);
             Assert.AreEqual("Donald E. Duck", c.Name);
             Assert.AreEqual("104 Main Street", c.Address);

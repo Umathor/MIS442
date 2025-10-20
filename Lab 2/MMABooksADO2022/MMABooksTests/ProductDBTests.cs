@@ -45,5 +45,28 @@ namespace MMABooksTests
             p = ProductDB.GetProduct(productCode);
             Assert.IsNull(p);
         }
+
+        [Test]
+        public void TestUpdateProduct()
+        {
+            Product p = new Product();
+            Product p2 = new Product();
+            p.ProductCode = "TST3";
+            p.Description = "Test Product 3";
+            p.OnHandQuantity = 20;
+            p.UnitPrice = 29.99m;
+            ProductDB.AddProduct(p);
+            p2.ProductCode = "TST4";
+            p2.Description = "Updated Product 4";
+            p2.OnHandQuantity = 40;
+            p2.UnitPrice = 39.99m;
+            bool updated = ProductDB.UpdateProduct(p, p2);
+            Assert.IsTrue(updated);
+            p = ProductDB.GetProduct("TST4");
+            Assert.AreEqual("Updated Product 4", p.Description);
+            Assert.AreEqual(40, p.OnHandQuantity);
+            Assert.AreEqual(39.99m, p.UnitPrice);
+            Assert.AreEqual("TST4", p.ProductCode);
+        }
     }
 }
