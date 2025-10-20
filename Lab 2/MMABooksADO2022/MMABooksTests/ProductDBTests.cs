@@ -29,5 +29,21 @@ namespace MMABooksTests
             p = ProductDB.GetProduct(productCode);
             Assert.AreEqual("Test Product 1", p.Description);
         }
+
+        [Test]
+        public void TestDeleteProduct()
+        {
+            Product p = new Product();
+            p.ProductCode = "TST2";
+            p.Description = "Test Product 2";
+            p.OnHandQuantity = 30;
+            p.UnitPrice = 19.99m;
+            string productCode = ProductDB.AddProduct(p);
+            p = ProductDB.GetProduct(productCode);
+            bool deleted = ProductDB.DeleteProduct(p);
+            Assert.IsTrue(deleted);
+            p = ProductDB.GetProduct(productCode);
+            Assert.IsNull(p);
+        }
     }
 }

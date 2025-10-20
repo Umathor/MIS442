@@ -44,7 +44,8 @@ namespace MMABooksTests
             c.State = "FL";
             c.ZipCode = "10102";
             c.CustomerID = CustomerDB.AddCustomer(c);
-            CustomerDB.DeleteCustomer(c);
+            bool deleted = CustomerDB.DeleteCustomer(c);
+            Assert.IsTrue(deleted);
             c = CustomerDB.GetCustomer(c.CustomerID);
             Assert.IsNull(c);
         }

@@ -93,9 +93,9 @@ namespace MMABooksDBClasses
             MySqlConnection connection = MMABooksDB.GetConnection();
             string deleteStatement =
                 "DELETE FROM Products " +
-                "WHERE ProductCode = @ProductCode" +
-                "AND Description = @Description" +
-                "AND OnHandQuantity = @OnHandQuantity" +
+                "WHERE ProductCode = @ProductCode " +
+                "AND Description = @Description " +
+                "AND OnHandQuantity = @OnHandQuantity " +
                 "AND UnitPrice = @UnitPrice";
             MySqlCommand deleteCommand =
                 new MySqlCommand(deleteStatement, connection);
