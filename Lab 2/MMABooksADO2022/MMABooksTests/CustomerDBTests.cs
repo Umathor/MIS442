@@ -8,6 +8,7 @@ using MMABooksDBClasses;
 
 namespace MMABooksTests
 {
+    [TestFixture]
     public class CustomerDBTests
     {
 
