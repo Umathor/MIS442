@@ -14,10 +14,10 @@ namespace MMABooksDBClasses
         public static Product GetProduct(string productCode)
         {
             MySqlConnection connection = MMABooksDB.GetConnection();
-            string selectStatement
-                = "SELECT ProductCode, Description, OnHandQuantity, UnitPrice "
-                + "FROM Products "
-                + "WHERE ProductCode = @ProductCode";
+            string selectStatement =
+                "SELECT ProductCode, Description, OnHandQuantity, UnitPrice " +
+                "FROM Products " +
+                "WHERE ProductCode = @ProductCode";
             MySqlCommand selectCommand =
                 new MySqlCommand(selectStatement, connection);
             selectCommand.Parameters.AddWithValue("@ProductCode", productCode);
@@ -60,22 +60,21 @@ namespace MMABooksDBClasses
                 "VALUES (@ProductCode, @Description, @OnHandQuantity, @UnitPrice)";
             MySqlCommand insertCommand =
                 new MySqlCommand(insertStatement, connection);
-            insertCommand.Parameters.AddWithValue(
-                "@ProductCode", product.ProductCode);
-            insertCommand.Parameters.AddWithValue(
-                "@Description", product.Description);
-            insertCommand.Parameters.AddWithValue(
-                "@OnHandQuantity", product.OnHandQuantity);
-            insertCommand.Parameters.AddWithValue(
-                "@UnitPrice", product.UnitPrice);
+            insertCommand.Parameters.AddWithValue("@ProductCode", product.ProductCode);
+            insertCommand.Parameters.AddWithValue("@Description", product.Description);
+            insertCommand.Parameters.AddWithValue("@OnHandQuantity", product.OnHandQuantity);
+            insertCommand.Parameters.AddWithValue("@UnitPrice", product.UnitPrice);
             try
             {
                 connection.Open();
                 insertCommand.ExecuteNonQuery();
                 string selectStatement =
-                    "SELECT LAST_INSERT_ID()";
+                "SELECT ProductCode, Description, OnHandQuantity, UnitPrice " +
+                "FROM Products " +
+                "WHERE ProductCode = @ProductCode";
                 MySqlCommand selectCommand =
                     new MySqlCommand(selectStatement, connection);
+                selectCommand.Parameters.AddWithValue("@ProductCode", product.ProductCode);
                 string productCode = Convert.ToString(selectCommand.ExecuteScalar());
                 return productCode;
             }
