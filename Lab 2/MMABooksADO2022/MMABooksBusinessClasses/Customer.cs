@@ -27,7 +27,8 @@ namespace MMABooksBusinessClasses
         public string City { get; set; }
         //data validation only checking state code and zip code
         private string state;
-        public string State {
+        public string State 
+        {
             get 
             { 
                 return state; 
