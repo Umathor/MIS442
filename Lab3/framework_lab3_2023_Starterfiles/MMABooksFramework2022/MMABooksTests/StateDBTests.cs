@@ -21,11 +21,11 @@ namespace MMABooksTests
         {
             db = new StateDB();
             DBCommand command = new DBCommand();
-            command.CommandText = "usp_testingResetStateData";
+            command.CommandText = "usp_testingResetData";
             command.CommandType = CommandType.StoredProcedure;
             db.RunNonQueryProcedure(command);
-            command.CommandText = "usp_testingResetData";
-            db.RunNonQueryProcedure(command);
+            //command.CommandText = "usp_testingResetData";
+            //db.RunNonQueryProcedure(command);
         }
 
         [Test]

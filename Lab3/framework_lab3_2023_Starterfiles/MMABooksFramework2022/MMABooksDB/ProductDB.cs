@@ -147,7 +147,7 @@ namespace MMABooksDB
             ProductProps props = new ProductProps();
             //set command object
             DBCommand command = new DBCommand();
-            command.CommandText = "usp_ProductRetrieve";
+            command.CommandText = "usp_ProductSelect";
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.Add("prodId", DBDbType.Int32);
             command.Parameters["prodId"].Value = (int)key;
@@ -187,7 +187,7 @@ namespace MMABooksDB
             ProductProps props;
             // set command object
             DBCommand command = new DBCommand();
-            command.CommandText = "usp_ProductRetrieveAll";
+            command.CommandText = "usp_ProductSelectAll";
             command.CommandType = CommandType.StoredProcedure;
             try
             {

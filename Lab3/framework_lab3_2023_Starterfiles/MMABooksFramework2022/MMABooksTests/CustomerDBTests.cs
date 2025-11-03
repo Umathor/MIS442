@@ -22,8 +22,8 @@ namespace MMABooksTests
             command.CommandText = "usp_testingResetData";
             command.CommandType = CommandType.StoredProcedure;
             db.RunNonQueryProcedure(command);
-            command.CommandText = "usp_testingResetStateData";
-            db.RunNonQueryProcedure(command);
+            //command.CommandText = "usp_testingResetStateData";
+            //db.RunNonQueryProcedure(command);
 
         }
 

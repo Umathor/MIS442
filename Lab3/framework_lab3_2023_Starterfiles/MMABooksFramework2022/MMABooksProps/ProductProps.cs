@@ -55,8 +55,8 @@ namespace MMABooksProps
             this.ProductID = (Int32)dr["ProductID"];
             this.ProductCode = ((string)dr["ProductCode"]).Trim();
             this.Description = (string)dr["Description"];
-            this.UnitPrice = (decimal)dr["Price"];
-            this.OnHandQuantity = (Int32)dr["OnHandQty"];
+            this.UnitPrice = (decimal)dr["UnitPrice"];
+            this.OnHandQuantity = (Int32)dr["OnHandQuantity"];
             this.ConcurrencyID = (Int32)dr["ConcurrencyID"];
         }
     }
