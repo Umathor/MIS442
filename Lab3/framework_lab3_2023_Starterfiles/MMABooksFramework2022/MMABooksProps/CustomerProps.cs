@@ -57,7 +57,7 @@ namespace MMABooksProps
             this.Name = (string)dr["Name"];
             this.Address = (string)dr["Address"];
             this.City = (string)dr["City"];
-            this.StateCode = (string)dr["StateCode"];
+            this.StateCode = (string)dr["State"];
             this.ZipCode = (string)dr["ZipCode"];
             this.ConcurrencyID = (int)dr["ConcurrencyID"];
         }
