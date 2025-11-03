@@ -17,7 +17,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE usp_CustomerSelect (in custId int)
 BEGIN
-	Select * from custemers where customerID = custId;
+	Select * from customers where customerID = custId;
 END //
 DELIMITER ;
 
@@ -32,7 +32,7 @@ DELIMITER //
 CREATE PROCEDURE usp_CustomerUpdate (in custId int, in name_p varchar(100), in address_p varchar(50), in city_p varchar(20), in state_p varchar(2), in zipcode_p varchar(15), in conCurrId int)
 BEGIN
 	Update customers
-    Set Name = name_p, Address = address_p, City = city_p, State = state_p, ZipeCode = zipcode_p, ConcurrencyID = (ConcurrencyID + 1)
+    Set Name = name_p, Address = address_p, City = city_p, State = state_p, ZipCode = zipcode_p, ConcurrencyID = (ConcurrencyID + 1)
     Where CustomerID = custId and ConcurrencyID = conCurrId;
 END //
 DELIMITER ;

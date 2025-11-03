@@ -38,7 +38,7 @@ namespace MMABooksDB
             command.Parameters.AddWithValue("name_p", props.Name);
             command.Parameters.AddWithValue("address_p", props.Address);
             command.Parameters.AddWithValue("city_p", props.City);
-            command.Parameters.AddWithValue("stateCode_p", props.StateCode);
+            command.Parameters.AddWithValue("state_p", props.StateCode);
             command.Parameters.AddWithValue("zipCode_p", props.ZipCode);
 
             //try to run command
@@ -192,14 +192,14 @@ namespace MMABooksDB
             command.Parameters.Add("name_p", DBDbType.VarChar);
             command.Parameters.Add("address_p", DBDbType.VarChar);
             command.Parameters.Add("city_p", DBDbType.VarChar);
-            command.Parameters.Add("stateCode_p", DBDbType.VarChar);
+            command.Parameters.Add("state_p", DBDbType.VarChar);
             command.Parameters.Add("zipCode_p", DBDbType.VarChar);
             command.Parameters.Add("conCurrId", DBDbType.Int32);
             command.Parameters["custId"].Value = props.CustomerID;
             command.Parameters["name_p"].Value = props.Name;
             command.Parameters["address_p"].Value = props.Address;
             command.Parameters["city_p"].Value = props.City;
-            command.Parameters["stateCode_p"].Value = props.StateCode;
+            command.Parameters["state_p"].Value = props.StateCode;
             command.Parameters["zipCode_p"].Value = props.ZipCode;
             command.Parameters["conCurrId"].Value = props.ConcurrencyID;
             try
