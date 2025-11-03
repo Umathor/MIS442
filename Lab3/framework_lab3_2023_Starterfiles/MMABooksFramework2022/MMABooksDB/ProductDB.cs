@@ -67,7 +67,7 @@ namespace MMABooksDB
             DBCommand command = new DBCommand();
             command.CommandText = "usp_ProductDelete";
             command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.Add("prodId", DBDbType.Int32);)
+            command.Parameters.Add("prodId", DBDbType.Int32);
             command.Parameters.Add("conCurrId", DBDbType.Int32);
             command.Parameters["prodId"].Value = props.ProductID;
             command.Parameters["conCurrId"].Value = props.ConcurrencyID;
@@ -96,6 +96,125 @@ namespace MMABooksDB
                     mConnection.Close();
             }
 
+        }
+        public bool Update(IBaseProps p)
+        {
+            int rowsAffected = 0;
+            ProductProps props = (ProductProps)p;
+            DBCommand command = new DBCommand();
+            command.CommandText = "usp_ProductUpdate";
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add("prodId", DBDbType.Int32);
+            command.Parameters.Add("productCode_p", DBDbType.VarChar);
+            command.Parameters.Add("description_p", DBDbType.VarChar);
+            command.Parameters.Add("unitprice_p", DBDbType.Decimal);
+            command.Parameters.Add("onhandquantity_p", DBDbType.Int32);
+            command.Parameters.Add("conCurrId", DBDbType.Int32);
+            command.Parameters["prodId"].Value = props.ProductID;
+            command.Parameters["productCode_p"].Value = props.ProductCode;
+            command.Parameters["description_p"].Value = props.Description;
+            command.Parameters["unitprice_p"].Value = props.UnitPrice;
+            command.Parameters["onhandquantity_p"].Value = props.OnHandQuantity;
+            command.Parameters["conCurrId"].Value = props.ConcurrencyID;
+            try
+            {
+                rowsAffected = RunNonQueryProcedure(command);
+                if (rowsAffected == 1)
+                {
+                    props.ConcurrencyID++;
+                    return true;
+                }
+                else
+                {
+                    string message = "Record cannot be updated. It has been edited by another user.";
+                    throw new Exception(message);
+                }
+            }
+            catch (Exception e)
+            {
+                // log this error
+                throw;
+            }
+            finally
+            {
+                if (mConnection.State == ConnectionState.Open)
+                    mConnection.Close();
+            }
+        }
+        public IBaseProps Retrieve(object key)
+        {
+            DBDataReader data = null;
+            ProductProps props = new ProductProps();
+            //set command object
+            DBCommand command = new DBCommand();
+            command.CommandText = "usp_ProductRetrieve";
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add("prodId", DBDbType.Int32);
+            command.Parameters["prodId"].Value = (int)key;
+            try
+            {
+                data = RunProcedure(command);
+                if (!data.IsClosed)
+                {
+                    if (data.Read())
+                    {
+                        props.SetState(data);
+                    }
+                    else
+                    {
+                        throw new Exception("Record does not exist in the database.");
+                    }
+                }
+                return props;
+            }
+            catch (Exception e)
+            {
+                // log this error
+                throw;
+            }
+            finally
+            {
+                if (data != null)
+                    data.Close();
+                if (mConnection.State == ConnectionState.Open)
+                    mConnection.Close();
+            }
+        }
+        public object RetrieveAll()
+        {
+            List<ProductProps> products = new List<ProductProps>();
+            DBDataReader data = null;
+            ProductProps props;
+            // set command object
+            DBCommand command = new DBCommand();
+            command.CommandText = "usp_ProductRetrieveAll";
+            command.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                data = RunProcedure(command);
+                if (!data.IsClosed)
+                {
+                    while (data.Read())
+                    {
+                        props = new ProductProps();
+                        props.SetState(data);
+                        products.Add(props);
+                    }
+                }
+                return products;
+            }
+            catch (Exception e)
+            {
+                // log this error
+                throw;
+            }
+            finally
+            {
+                if (data != null)
+                    data.Close();
+                if (mConnection.State == ConnectionState.Open)
+                    mConnection.Close();
+            }
         }
     }
 }

@@ -1,12 +1,32 @@
-﻿using System;
+﻿using MMABooksTools;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using MMABooksProps;
+using MMABooksDB;
 
 namespace MMABooksBusiness
 {
-    internal class Product
+    public class Product : BaseBusiness
     {
+        public override object GetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void SetDefaultProperties()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void SetRequiredRules()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void SetUp()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
