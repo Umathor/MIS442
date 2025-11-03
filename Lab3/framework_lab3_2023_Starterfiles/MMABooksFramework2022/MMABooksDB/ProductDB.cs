@@ -42,7 +42,7 @@ namespace MMABooksDB
                 rowsAffected = RunNonQueryProcedure(command);
                 if (rowsAffected == 1)
                 {
-                    props.ProductID = Convert.ToInt32(command.Parameters["productId"].Value);
+                    props.ProductID = Convert.ToInt32(command.Parameters["prodId"].Value);
                     props.ConcurrencyID = 1;
                     return props;
                 }
