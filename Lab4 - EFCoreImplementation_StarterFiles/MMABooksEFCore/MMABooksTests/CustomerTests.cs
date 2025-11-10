@@ -23,6 +23,13 @@ namespace MMABooksTests
             dbContext.Database.ExecuteSqlRaw("call usp_testingResetData()");
             dbContext.Database.ExecuteSqlRaw("call usp_testingResetInvoiceData");
         }
+        [OneTimeTearDown]
+        public void TearDown()
+        {
+            dbContext.Database.ExecuteSqlRaw("call usp_testingResetData()");
+            dbContext.Database.ExecuteSqlRaw("call usp_testingResetInvoiceData");
+            dbContext.Dispose();
+        }
 
         [Test]
         public void GetAllTest()
@@ -92,13 +99,33 @@ namespace MMABooksTests
         [Test]
         public void CreateTest()
         {
-
+            c = new Customer();
+            c.Name = "Test, Test";
+            c.Address = "123 Test St.";
+            c.City = "Testville";
+            c.State = "OR";
+            c.ZipCode = "12345";
+            dbContext.Customers.Add(c);
+            dbContext.SaveChanges();
+            // get the customerid of the new customer
+            int newCustomerId = c.CustomerId;
+            // retrieve the new customer
+            c = dbContext.Customers.Find(newCustomerId);
+            Assert.AreEqual("Test, Test", c.Name);
+            Assert.AreEqual("123 Test St.", c.Address);
+            Assert.AreEqual("Testville", c.City);
+            Assert.AreEqual("OR", c.State);
+            Assert.AreEqual("12345", c.ZipCode);
         }
 
         [Test]
         public void UpdateTest()
         {
-
+            c = new Customer();
+            c = dbContext.Customers.Find(20);
+            c.Name = "Updated, Customer";
+            dbContext.SaveChanges();
+            Assert.AreEqual("Updated, Customer", dbContext.Customers.Find(20).Name);
         }
 
         public void PrintAll(List<Customer> customers)

@@ -24,6 +24,14 @@ namespace MMABooksTests
             dbContext.Database.ExecuteSqlRaw("call usp_testingResetStateData()");
         }
 
+        [OneTimeTearDown]
+        public void TearDown()
+        {
+            dbContext.Database.ExecuteSqlRaw("call usp_testingResetData()");
+            dbContext.Database.ExecuteSqlRaw("call usp_testingResetStateData()");
+            dbContext.Dispose();
+        }
+
         [Test]
         public void GetAllTest()
         {
@@ -75,12 +83,21 @@ namespace MMABooksTests
         [Test]
         public void CreateTest()
         {
-
+            s = new State();
+            s.StateCode = "ZZ";
+            s.StateName = "Zzyzx";
+            dbContext.States.Add(s);
+            dbContext.SaveChanges();
+            Assert.AreEqual("Zzyzx", dbContext.States.Find("ZZ").StateName);
         }
 
         [Test]
         public void UpdateTest()
         {
+            s = dbContext.States.Find("OR");
+            s.StateName = "Oregon";
+            dbContext.SaveChanges();
+            Assert.AreEqual("Oregon", dbContext.States.Find("OR").StateName);
 
         }
 
