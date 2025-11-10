@@ -3,7 +3,7 @@ using System.Linq;
 using System;
 
 using NUnit.Framework;
-using MMABooksEFClasses.MarisModels;
+using MMABooksEFClasses.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MMABooksTests
@@ -11,7 +11,7 @@ namespace MMABooksTests
     [TestFixture]
     public class CustomerTests
     {
-        /*
+        
         MMABooksContext dbContext;
         Customer c;
         List<Customer> customers;
@@ -21,31 +21,53 @@ namespace MMABooksTests
         {
             dbContext = new MMABooksContext();
             dbContext.Database.ExecuteSqlRaw("call usp_testingResetData()");
+            dbContext.Database.ExecuteSqlRaw("call usp_testingResetInvoiceData");
         }
 
         [Test]
         public void GetAllTest()
         {
+            customers = dbContext.Customers.OrderBy(c => c.Name).ToList();
+            Assert.AreEqual(696, customers.Count);
+            Assert.AreEqual("Abeyatunge, Derek", customers[0].Name);
+            PrintAll(customers);
         }
 
         [Test]
         public void GetByPrimaryKeyTest()
         {
+            c = dbContext.Customers.Find(20);
+            Assert.IsNotNull(c);
+            Assert.AreEqual("Chamberland, Sarah", c.Name);
+            Console.WriteLine(c);
         }
 
         [Test]
         public void GetUsingWhere()
         {
             // get a list of all of the customers who live in OR
+            customers = dbContext.Customers
+                .Where(c => c.State == "OR")
+                .OrderBy(c => c.Name)
+                .ToList();
+            Assert.AreEqual(5, customers.Count);
+            Assert.AreEqual("Erpenbach, Lee", customers[0].Name);
         }
 
         [Test]
         public void GetWithInvoicesTest()
         {
            // get the customer whose id is 20 and all of the invoices for that customer
+              c = dbContext.Customers
+                 .Include("Invoices")
+                 .Where(c => c.CustomerId == 20)
+                 .SingleOrDefault();
+            Assert.IsNotNull(c);
+            Assert.AreEqual("Chamberland, Sarah", c.Name);
+            Assert.AreEqual(3, c.Invoices.Count);
         }
 
-        [Test]
+        /*[Test]
         public void GetWithJoinTest()
         {
             // get a list of objects that include the customer id, name, statecode and statename
@@ -56,11 +78,15 @@ namespace MMABooksTests
                (c, s) => new { c.CustomerId, c.Name, c.State, s.StateName }).OrderBy(r => r.StateName).ToList();
             Assert.AreEqual(696, customers.Count);
         }
-
+        */
+        
         [Test]
         public void DeleteTest()
         {
-
+            c = dbContext.Customers.Find(20);
+            dbContext.Customers.Remove(c);
+            dbContext.SaveChanges();
+            Assert.IsNull(dbContext.Customers.Find(20));
         }
 
         [Test]
@@ -82,7 +108,7 @@ namespace MMABooksTests
                 Console.WriteLine(c);
             }
         }
-        */
+        
         
     }
 }

@@ -3,7 +3,7 @@ using System.Linq;
 using System;
 
 using NUnit.Framework;
-using MMABooksEFClasses.MarisModels;
+using MMABooksEFClasses.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MMABooksTests
@@ -11,10 +11,12 @@ namespace MMABooksTests
     [TestFixture]
     public class ProductTests
     {
-    /*
+    
             MMABooksContext dbContext;
+            Product p;
+            List<Product> products;
 
-            [SetUp]
+        [SetUp]
             public void Setup()
             {
                 dbContext = new MMABooksContext();
@@ -24,6 +26,8 @@ namespace MMABooksTests
             [Test]
             public void GetAllTest()
             {
+                // get a list of all of the products ordered by product code
+
             }
 
             [Test]
@@ -64,6 +68,6 @@ namespace MMABooksTests
             {
 
             }
-            */
+
     }
 }
