@@ -11,7 +11,7 @@ namespace MMABooksTests
     [TestFixture]
     public class StateTests
     {
-        /*
+        
         MMABooksContext dbContext;
         State s;
         List<State> states;
@@ -21,6 +21,7 @@ namespace MMABooksTests
         {
             dbContext = new MMABooksContext();
             dbContext.Database.ExecuteSqlRaw("call usp_testingResetData()");
+            dbContext.Database.ExecuteSqlRaw("call usp_testingResetStateData()");
         }
 
         [Test]
@@ -37,7 +38,7 @@ namespace MMABooksTests
         {
             s = dbContext.States.Find("OR");
             Assert.IsNotNull(s);
-            Assert.AreEqual("Oregon", s.StateName);
+            Assert.AreEqual("Ore", s.StateName);
             Console.WriteLine(s);
         }
 
@@ -46,7 +47,7 @@ namespace MMABooksTests
         {
             // current version generates a null processing error StartsWith can't operate on a nullable value
             // states = dbContext.States.Where(s => s.StateName.StartsWith("A")).OrderBy(s => s.StateName).ToList();
-            states = dbContext.States.Where(s => s.StateName == "Oregon").OrderBy(s => s.StateName).ToList();
+            states = dbContext.States.Where(s => s.StateName == "Ore").OrderBy(s => s.StateName).ToList();
             Assert.AreEqual(1, states.Count);
             Assert.AreEqual("OR", states[0].StateCode);
             PrintAll(states);
@@ -57,7 +58,7 @@ namespace MMABooksTests
         {
             s = dbContext.States.Include("Customers").Where(s => s.StateCode == "OR").SingleOrDefault();
             Assert.IsNotNull(s);
-            Assert.AreEqual("Oregon", s.StateName);
+            Assert.AreEqual("Ore", s.StateName);
             Assert.AreEqual(5, s.Customers.Count);
             Console.WriteLine(s);
         }
@@ -90,6 +91,6 @@ namespace MMABooksTests
                 Console.WriteLine(s);
             }
         }
-        */
+        
     }
 }
