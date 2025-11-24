@@ -46,7 +46,7 @@ namespace MMABooksUWP
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            service = new HttpDataService("http://localhost:5000/api");
+            service = new HttpDataService("https://localhost:5001/api");
             List<State> states = await service.GetAsync<List<State>>("states");
             foreach (State s in states)
                 this.States.Add(s);
