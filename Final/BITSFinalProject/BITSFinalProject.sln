@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BITSFinalProject", "BITSFin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BITS Tests", "BITS Tests\BITS Tests.csproj", "{BCD0431C-D2B4-4945-A53D-96ED95895A96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BITSRestAPI", "BITSRestAPI\BITSRestAPI.csproj", "{5C951FA9-1A41-4244-8691-115960803541}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BCD0431C-D2B4-4945-A53D-96ED95895A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCD0431C-D2B4-4945-A53D-96ED95895A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCD0431C-D2B4-4945-A53D-96ED95895A96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C951FA9-1A41-4244-8691-115960803541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C951FA9-1A41-4244-8691-115960803541}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C951FA9-1A41-4244-8691-115960803541}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C951FA9-1A41-4244-8691-115960803541}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

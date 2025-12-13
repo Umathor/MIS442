@@ -111,7 +111,7 @@ namespace BITS_Tests
             Assert.AreEqual("New Lager Recipe", createdRecipe.Name);
             Assert.AreEqual(1, createdRecipe.Version);
             Assert.AreEqual(70, createdRecipe.StyleId);
-            Assert.AreEqual(25.0, createdRecipe.Volume);
+            Assert.AreEqual(25.0, createdRecipe.Volume); 
             Assert.AreEqual(1, createdRecipe.EquipmentId);
             Assert.AreEqual(16, createdRecipe.MashId);
         }

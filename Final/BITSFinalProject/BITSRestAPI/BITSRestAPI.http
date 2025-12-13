@@ -1,0 +1,6 @@
+@BITSRestAPI_HostAddress = http://localhost:5052
+
+GET {{BITSRestAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
